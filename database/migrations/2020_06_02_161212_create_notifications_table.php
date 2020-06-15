@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRepImmo extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddRepImmo extends Migration
      */
     public function up()
     {
-        Schema::table('immo', function (Blueprint $table) {
-            $table->datetime('date_rep')->nullable();
-            $table->string('description')->nullable();
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +26,6 @@ class AddRepImmo extends Migration
      */
     public function down()
     {
-        Schema::table('immo', function (Blueprint $table) {
-            $table->dropColumn('date_rep');
-            $table->dropColumn('description');
-        });
+        Schema::dropIfExists('notifications');
     }
 }
