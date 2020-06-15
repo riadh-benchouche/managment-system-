@@ -15,15 +15,14 @@ class CreateImmoTable extends Migration
     {
         Schema::create('immo', function (Blueprint $table) {
             $table->Increments('id');
-            $table->integer('code')->unique()->unsigned();
-            $table->string('nature');
-            $table->string('lib');
-            $table->string('fournisseur');
-            $table->string('serie');
-            $table->string('affectation');
-            $table->integer('dv')->nullable()->unsigned();
-            $table->string('type');
-            $table->integer('cout')->unsigned();
+            $table->string('prod_nature');
+            $table->string('prod_name');
+            $table->string('prod_prov');
+            $table->string('prod_serie');
+            $table->integer('prod_service');
+            $table->integer('prod_lifetime')->nullable()->unsigned();
+            $table->string('prod_type');
+            $table->integer('prod_coast')->unsigned();
             $table->timestamps();
         });
 

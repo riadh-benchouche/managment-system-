@@ -51,23 +51,47 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('upgrade', function () {
 		return view('pages.upgrade');
 	})->name('upgrade');
-    Route::get('immo','ImmoController@index')->name('immo');
-    Route::get('immo/create','ImmoController@create')->name('immo/create');
-    Route::post('immo','ImmoController@store');
-    Route::get('immo/{id}/edit','ImmoController@edit');
-    Route::get('immo/{id}/edit1','TransfertController@edit1');
-    Route::get('immo/{id}/edit2','ImmoController@edit2');
-    Route::get('immo/transfert','TransfertController@index1')->name('immo/transfert');
-    Route::get('immo/rep','ImmoController@index2')->name('immo/rep');
-    Route::get('immo/ref','ImmoController@index3')->name('immo/ref');
-    Route::put( 'immo/{id}','ImmoController@update');
-    Route::delete( 'immo/{id}','ImmoController@destroy');
-});
 
-Route::group(['middleware' => 'auth'], function () {
+});
+Route::get('historic','HistoricController@index')->name('historic');
+
+Route::get('immo','ImmoController@index')->name('immo');
+Route::get('notification','ImmoController@notification')->name('notificationss');
+// Route::put( 'reforme/{id}','ImmoController@reforme');
+Route::get('immo/create','ImmoController@create')->name('immo/create');
+Route::post('immo','ImmoController@store');
+Route::get('immo/{id}/edit','ImmoController@edit');
+Route::get('immo/{id}/edit1','ImmoController@edit1');
+Route::get('immo/{id}/edit2','ImmoController@edit2');
+Route::get('immo/transfert','ImmoController@transfert')->name('immo/transfert');
+Route::get('immo/rep','ImmoController@rep')->name('immo/rep');
+Route::get('immo/ref','ImmoController@ref')->name('immo/ref');
+Route::put( 'immo/{id}','ImmoController@update');
+Route::put( 'immoT/{id}','ImmoController@updateT');
+Route::put( 'immoR/{id}','ImmoController@updateR');
+Route::put( 'reforme/{id}','ImmoController@update1');
+Route::delete( 'immo/{id}','ImmoController@destroy');
+
+Route::get('departement','departementController@index')->name('departement');
+Route::get('departement/create','departementController@create')->name('departement/create');
+Route::post('departement','departementController@store');
+Route::get('departement/{id}/edit','departementController@edit');
+Route::put( 'departement/{id}','departementController@update');
+Route::delete( 'departement/{id}','departementController@destroy');
+
+Route::get('service','serviceController@index')->name('service');
+Route::get('service/create','serviceController@create')->name('service/create');
+Route::post('service','serviceController@store');
+Route::get('service/{id}/edit','serviceController@edit');
+Route::put( 'service/{id}','serviceController@update');
+Route::delete( 'service/{id}','serviceController@destroy');
+
+
+
+
+Route::group(['middleware -> can:manage-users' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
-

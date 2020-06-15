@@ -31,41 +31,24 @@
                                 <th scope="col" class="text-center">type d'acquisition</th>
                                 <th scope="col" class="text-center">Date de Réforme</th>
                                 <th scope="col" class="text-center">Couts d'acquisition</th>
-                                <th scope="col" class="text-center" >Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($immos as $immo)
+                                @if($immo->isactif==false)
                                 <tr>
-                                    <td>{{$immo->code}}</td>
-                                    <td>{{$immo->lib}}</td>
-                                    <td>{{$immo->fournisseur}}</td>
-                                    <td>{{$immo->serie}}</td>
-                                    <td>{{$immo->affectation}}</td>
-                                    <td>{{$immo->nature}}</td>
+                                    <td>{{$immo->id}}</td>
+                                    <td>{{$immo->prod_name}}</td>
+                                    <td>{{$immo->prod_prov}}</td>
+                                    <td>{{$immo->prod_serie}}</td>
+                                    <td>{{$immo->prod_service}}</td>
+                                    <td>{{$immo->prod_nature}}</td>
                                 <!-- <td>{{$immo->dv}}</td>-->
-                                    <td>{{$immo->type}}</td>
+                                    <td>{{$immo->prod_type}}</td>
                                     <td>{{$immo->deleted_at}}</td>
-                                    <td>{{$immo->cout}} DZD</td>
-                                    <td class=" td-actions text-right ">
-                                    <!-- <a class="btn btn-warning btn-sm" href="">Details</a>
-                                            <a  href="{{ url ('immo/'.$immo->id.'/edit') }}" class="btn btn-default btn-sm">Editer</a>
-                                            <a  href="" class="btn btn-danger btn-sm">Supprimer</a>-->
-
-                                        <form action="{{ url('immo/'.$immo->id) }}" method="post">
-                                            @csrf
-                                            @method('delete')
-
-                                            <button type="button" class="btn btn-danger btn-link" data-original-title="" title="" onclick="confirm('{{ __("etes vous sur de vouloir envoyer a la Réforme ?") }}') ? this.parentElement.submit() : ''">
-                                                <i class="material-icons">delete_forever</i>
-                                                <div class="ripple-container"></div>
-                                            </button>
-                                        </form>
-
-                                    </td>
-
+                                    <td>{{$immo->prod_coast}} DZD</td>
                                 </tr>
-
+                                @endif
                             @endforeach
                             </tbody>
 

@@ -25,15 +25,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($immoss as $immo)
-                                    <tr>
-                                        <td>{{$historic->immos->id}}</td>
-                                        <td>{{$historic->immos->services->service_name}}</td>
-                                        <td>{{$historic->number_rep}}</td>
-                                        <td>{{$historic->time_ass}}</td>
-                                        <td>{{$historic->time_trans}}</td>
-                                        <td>{{$immo->time_rep}}</td>
-                                        <td>{{$immo->time_ref}}</td>
+
+                            @foreach($historics as $historic)
+                                <tr >
+                                    <td class="text-center">{{$historic->immos->id}}</td>
+                                    <td class="text-center">{{$historic->immos->services->service_name}}</td>
+                                    <td class="text-center">{{$historic->number_rep}}</td>
+                                    <td class="text-center">{{$historic->time_ass}}</td>
+                                    <td class="text-center">{{$historic->time_trans}}</td>
+                                    <td class="text-center">{{$historic->time_rep}}</td>
+                                    <td class="text-center">{{$historic->time_ref}}</td>
+                                </tr>
                             @endforeach
                             </tbody>
 

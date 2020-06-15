@@ -20,6 +20,17 @@
                       <a href="{{ route('user.index') }}" class="btn btn-sm btn-primary">{{ __('Back to list') }}</a>
                   </div>
                 </div>
+                  @foreach ($roles as $role)
+                      <div class="form-check m-3 " >
+                          <label for="{{ $role -> id  }}" class="form-check-label"> {{$role -> name}}
+                            <input type="checkbox" class="form-check-input" name="roles[]" value="{{ $role -> id}}" id="{{ $role -> id }}"
+                                   @if ($user -> roles -> pluck('id')->contains($role->id))checked @endif >
+                              <span class="form-check-sign">
+                                    <span class="check"></span>
+                              </span>
+                          </label>
+                      </div>
+                    @endforeach
                 <div class="row">
                   <label class="col-sm-2 col-form-label">{{ __('Name') }}</label>
                   <div class="col-sm-7">

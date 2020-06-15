@@ -14,7 +14,7 @@
 
                 <div class="card ">
                     <div class="card-header card-header-warning">
-                        <h4 class="card-title">{{ __('Immobilisations Corporelles') }}</h4>
+                        <h4 class="card-title">{{ __('Transfert') }}</h4>
                         <p class="card-category"></p>
                     </div>
                     <div class="card-body ">
@@ -23,30 +23,23 @@
                             <tr>
                                 <th scope="col" class="text-center">Code</th>
                                 <th scope="col" class="text-center">Libellé</th>
-                                <th scope="col" class="text-center">Fournisseur</th>
                                 <th scope="col" class="text-center">N°Série</th>
                                 <th scope="col" class="text-center">affectation</th>
-                                <th scope="col" class="text-center">Nature</th>
-                                <!--   <th scope="col" class="text-center">Durée de vie </th>-->
-                                <th scope="col" class="text-center">type d'acquisition</th>
                                 <th scope="col" class="text-center">Date d'acquisition</th>
-                                <th scope="col" class="text-center">Couts d'acquisition</th>
+                                <th scope="col" class="text-center">Date de transfert</th>
                                 <th scope="col" class="text-center" >Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($immoss as $immo)
+                            @foreach($immos as $immo)
+                                @if($immo->isactif)
                                 <tr>
-                                    <td>{{$immo->code}}</td>
-                                    <td>{{$immo->lib}}</td>
-                                    <td>{{$immo->fournisseur}}</td>
-                                    <td>{{$immo->serie}}</td>
-                                    <td>{{$immo->affectation}}</td>
-                                    <td>{{$immo->nature}}</td>
-                                <!-- <td>{{$immo->dv}}</td>-->
-                                    <td>{{$immo->type}}</td>
-                                    <td>{{$immo->created_at}}</td>
-                                    <td>{{$immo->cout}} DZD</td>
+                                    <td class="text-center">{{$immo->id}}</td>
+                                    <td class="text-center">{{$immo->prod_name}}</td>
+                                    <td class="text-center">{{$immo->prod_serie}}</td>
+                                    <td class="text-center">{{$immo->services->service_name}}</td>
+                                    <td class="text-center">{{$immo->created_at}}</td>
+                                    <td class="text-center">@if($immo->time_trans == null ) <div class="text-danger"  >non transferé </div> @else {{ $immo->time_trans }} @endif</td>
                                     <td class=" td-actions text-right ">
                                     <!-- <a class="btn btn-warning btn-sm" href="">Details</a>
                                             <a  href="{{ url ('immo/'.$immo->id.'/edit') }}" class="btn btn-default btn-sm">Editer</a>
@@ -61,7 +54,7 @@
                                     </td>
 
                                 </tr>
-
+                                @endif
                             @endforeach
                             </tbody>
 

@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use App\User;
 use App\Http\Requests\UserRequest;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+    use notifiable;
     /**
      * Display a listing of the users
      *
@@ -38,6 +43,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request, User $model)
     {
+
         $model->create($request->merge(['password' => Hash::make($request->get('password'))])->all());
 
         return redirect()->route('user.index')->withStatus(__('User successfully created.'));
@@ -51,7 +57,16 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+       if( Gate::denies('edit-users', $user)){
+
+           return redirect()->route('user.index');
+
+        }
+        $roles = Role::all();
+        return view('users.edit', /*compact('user')*/ [
+            'user' => $user,
+            'roles' => $roles
+        ]);
     }
 
     /**
@@ -63,13 +78,17 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User  $user)
     {
+        $user ->roles()->sync($request->roles);
+
+
+
         $hasPassword = $request->get('password');
         $user->update(
             $request->merge(['password' => Hash::make($request->get('password'))])
                 ->except([$hasPassword ? '' : 'password']
         ));
 
-        return redirect()->route('user.index')->withStatus(__('User successfully updated.'));
+        return redirect()->route('user.index')->withStatus(__('Utilisateur modifier avec succes.'));
     }
 
     /**
@@ -80,8 +99,14 @@ class UserController extends Controller
      */
     public function destroy(User  $user)
     {
+        if( Gate::denies('delete-users', $user)){
+
+            return redirect()->route('user.index');
+
+        }
+        $user->roles()->detach();
         $user->delete();
 
-        return redirect()->route('user.index')->withStatus(__('User successfully deleted.'));
+        return redirect()->route('user.index')->withStatus(__('utilisateur supprimer avec succes. '));
     }
 }

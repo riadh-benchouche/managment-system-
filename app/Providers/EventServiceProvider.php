@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Events\NewProductCreatedEvent;
+use App\Events\ProductRepareEvent;
+use App\Events\ProductTransferedEvent;
+use App\Listeners\NewproductCreatedListener;
+use App\Listeners\ProductRepareListener;
+use App\Listeners\ProductTransferedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -15,9 +21,15 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
+       NewProductCreatedEvent::class=> [
+            NewproductCreatedListener::class,
         ],
+        ProductTransferedEvent::class => [
+            ProductTransferedListener::class,
+        ],
+        ProductRepareEvent::class => [
+            ProductRepareListener::class,
+        ]
     ];
 
     /**

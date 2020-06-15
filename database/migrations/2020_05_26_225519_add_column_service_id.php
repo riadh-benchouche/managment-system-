@@ -13,9 +13,9 @@ class AddColumnServiceId extends Migration
      */
     public function up()
     {
-        Schema::table('departement', function (Blueprint $table) {
-            $table->integer('service_id')->unsigned()->after('departemenet_id');
-            $table->foreign('service_id')->references('service_id')->on('service');
+        Schema::table('service', function (Blueprint $table) {
+            $table->integer('d_id')->unsigned()->after('service_id');
+            $table->foreign('d_id')->references('departemenet_id')->on('departement');
         });
     }
 
@@ -26,9 +26,9 @@ class AddColumnServiceId extends Migration
      */
     public function down()
     {
-        Schema::table('departement', function (Blueprint $table) {
-                $table->dropForeign('[service_id]');
-                $table->dropColumn('service_id');
+        Schema::table('service', function (Blueprint $table) {
+                $table->dropForeign('[d_id]');
+                $table->dropColumn('d_id');
         });
     }
 }

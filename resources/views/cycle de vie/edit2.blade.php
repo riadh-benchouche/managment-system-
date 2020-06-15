@@ -17,7 +17,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{url('immo/'.$immo->id)}}" method="post">
+                <form action="{{url('immoR/'.$immo->id)}}" method="post">
                     <input type="hidden" name="_method" value="PUT">
                     {{csrf_field()}}
                     <div class="card ">
@@ -27,62 +27,14 @@
                         </div>
                         <div class="card-body ">
                             <div class="row">
-                                <label  class="col-sm-2 col-form-label mt-1" >Code</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('code')) has-danger @endif" >
-                                    <input  type="number" name="code" class="form-control has-danger" value="{{$immo->code}}" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label  class="col-sm-2 col-form-label mt-1">Libellé</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('lib')) has-danger @endif" >
-                                    <input  type="text" name="lib" class="form-control"  value="{{$immo->lib}}" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label  class="col-sm-2 col-form-label mt-1">Fournisseur</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('fournisseur')) has-danger @endif" >
-                                    <input  type="text" name="fournisseur" class="form-control" value="{{$immo->fournisseur}}" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label  class="col-sm-2 col-form-label mt-1">N°Série</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('serie')) has-danger @endif" >
-                                    <input  type="text" name="serie" class="form-control" value="{{$immo->serie}}" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label  class="col-sm-2 col-form-label mt-1">Dommaine d'affectation</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('affectation')) has-danger @endif" >
-                                    <input  type="text" name="affectation" class="form-control" value="{{$immo->affectation}}" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label  class="col-sm-2 col-form-label mt-1">Type d'acquisition</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('type')) has-danger @endif" >
-                                    <input  type="text" name="type" class="form-control" value="{{$immo->type}}" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label  class="col-sm-2 col-form-label mt-1">Nature d'acquisition</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('nature')) has-danger @endif" >
-                                    <input  type="text" name="nature" class="form-control" value="{{$immo->nature}}" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label  class="col-sm-2 col-form-label mt-1">couts</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('cout')) has-danger @endif">
-                                    <input  type="number" name="cout" class="form-control" value="{{$immo->cout}}" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <label  class="col-sm-2 col-form-label mt-1">Date de reparation</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('cout')) has-danger @endif">
-                                    <input  type="date" name="date_rep" class="form-control" value="{{$immo->date_rep}}" >
+                                <div class="col-sm-7 mt-2 @if($errors->get('time_rep')) has-danger @endif">
+                                    <input  type="date" name="time_rep" class="form-control" value="{{$immo->time_rep}}" >
                                 </div>
                             </div>
                             <div class="row">
-                                <label  class="col-sm-2 col-form-label mt-1">Description</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('cout')) has-danger @endif">
+                                <label  class="col-sm-2 col-form-label mt-1">Motif</label>
+                                <div class="col-sm-7 mt-2 @if($errors->get('description')) has-danger @endif">
                                     <input  type="text" name="description" class="form-control" value="{{$immo->description}}" >
                                 </div>
                             </div>

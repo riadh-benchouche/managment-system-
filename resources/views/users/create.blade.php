@@ -20,6 +20,16 @@
                       <a href="{{ route('user.index') }}" class="btn btn-sm btn-primary">{{ __('Back to list') }}</a>
                   </div>
                 </div>
+                  <div class="row">
+                      <label  for="Formaffectation" class="col-sm-2 col-form-label mt-1">Role</label>
+                      <div class="col-sm-7 mt-2 @if($errors->get('role')) has-danger @endif">
+                          <select name="role" class="form-control " data-style="btn btn-link" value="{{old('role')}}" id="formrole">
+                              <option value="admin" >Admin</option>
+                              <option value="comptable">Comptable</option>
+                              <option value="employee">Employee</option>
+                          </select>
+                      </div>
+                  </div>
                 <div class="row">
                   <label class="col-sm-2 col-form-label">{{ __('Name') }}</label>
                   <div class="col-sm-7">

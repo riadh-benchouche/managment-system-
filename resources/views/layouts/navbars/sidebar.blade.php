@@ -32,14 +32,46 @@
                 <span class="sidebar-normal">{{ __('User profile') }} </span>
               </a>
             </li>
+              @can('manage-users')
             <li class="nav-item{{ $activePage ?? '' == 'user-management' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('user.index') }}">
                 <span class="sidebar-mini"> UM </span>
                 <span class="sidebar-normal"> {{ __('User Management') }} </span>
               </a>
-            </li>
+            </li> @endcan
           </ul>
         </div>
+      </li>
+            @can('edit-users')
+        <li class="nav-item {{ ($activePage ?? '' == 'profile' || $activePage ?? '' == 'user-management') ? ' active' : '' }}">
+            <a class="nav-link" data-toggle="collapse" href="#departement" aria-expanded="true">
+                <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
+                <p>{{ __('Departement et Service') }}
+                    <b class="caret"></b>
+                </p>
+            </a>
+            <div class="collapse show" id="departement">
+                <ul class="nav">
+                    <li class="nav-item{{ $activePage ?? '' == 'profile' ? ' active' : '' }}">
+                        <a class="nav-link" href="{{ route('departement') }}">
+                            <span class="sidebar-mini"> D </span>
+                            <span class="sidebar-normal">{{ __('Departement') }} </span>
+                        </a>
+                    </li>
+                        <li class="nav-item{{ $activePage ?? '' == 'user-management' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('service') }}">
+                                <span class="sidebar-mini"> S </span>
+                                <span class="sidebar-normal"> {{ __('Service') }} </span>
+                            </a>
+                        </li>
+                </ul>
+            </div>
+        </li>@endcan
+      <li class="nav-item{{ $activePage ?? '' == 'typography' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('notificationss') }}">
+          <i class="material-icons">notifications</i>
+            <p>{{ __('Notifications') }}</p>
+        </a>
       </li>
       <li class="nav-item{{ $activePage ?? '' == 'typography' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('immo') }}">
@@ -73,6 +105,15 @@
                 <p>{{ __('Réforme') }}</p>
             </a>
         </li>
+        @can('edit-users')
+
+        <li class="nav-item{{ $activePage ?? '' == 'Historic' ? ' active' : '' }}">
+            <a class="nav-link" href="{{ route('historic') }}">
+                <i class="material-icons">restore_from_trash</i>
+                <p>{{ __('Historique') }}</p>
+            </a>
+        </li>
+        @endcan
 
       <!-- <li class="nav-item active-pro{{ $activePage ?? '' == 'upgrade' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('upgrade') }}">

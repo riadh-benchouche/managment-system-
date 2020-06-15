@@ -23,11 +23,13 @@
                     </div>
                   </div>
                 @endif
+                  @can('edit-users')
                 <div class="row">
                   <div class="col-12 text-right">
                     <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Add user') }}</a>
                   </div>
                 </div>
+                    @endcan
                 <div class="table-responsive">
                   <table class="table">
                     <thead class=" text-primary">
@@ -36,6 +38,9 @@
                       </th>
                       <th>
                         {{ __('Email') }}
+                      </th>
+                      <th>
+                          {{ __('Roles') }}
                       </th>
                       <th>
                         {{ __('Date de Création') }}
@@ -53,10 +58,14 @@
                           <td>
                             {{ $user->email }}
                           </td>
+                            <td>
+                                {{ implode ( ', ', $user->roles()->get()->pluck('name')->toArray() ) }}
+                            </td>
                           <td>
                             {{ $user->created_at->format('Y-m-d') }}
                           </td>
                           <td class="td-actions text-right">
+                                @can('edit-users')
                             @if ($user->id != auth()->id())
                               <form action="{{ route('user.destroy', $user) }}" method="post">
                                   @csrf
@@ -77,6 +86,7 @@
                                 <div class="ripple-container"></div>
                               </a>
                             @endif
+                                    @endcan
                           </td>
                         </tr>
                       @endforeach

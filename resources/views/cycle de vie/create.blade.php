@@ -26,61 +26,48 @@
                     <div class="card ">
 
                         <div class="card-header card-header-warning">
-                            <h4 class="card-title">{{ __('Nouvelle Acquisition') }}</h4>
+                            <h4 class="card-title">{{ __('Nouveau service') }}</h4>
                             <p class="card-category"></p>
                         </div>
                         <div class="card-body ">
                             <div class="row">
-                                <label  class="col-sm-2 col-form-label mt-1">Code</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('code')) has-danger @endif">
-                                <input  type="number" name="code" class="form-control " value="{{old('code')}}">
-                                </div>
-                            </div>
-                            <div class="row">
                                 <label  class="col-sm-2 col-form-label mt-1">Libellé</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('libellé')) has-danger @endif">
-                                <input  type="text" name="lib" class="form-control " value="{{old('lib')}}">
+                                <div class="col-sm-7 mt-2 @if($errors->get('prod_name')) has-danger @endif">
+                                <input  type="text" name="prod_name" class="form-control " value="{{old('prod_name')}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <label  class="col-sm-2 col-form-label mt-1">Fournisseur</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('fournisseur')) has-danger @endif">
-                                <input  type="text" name="fournisseur" class="form-control" value="{{old('fournisseur')}}">
+                                <div class="col-sm-7 mt-2 @if($errors->get('prod_prov')) has-danger @endif">
+                                <input  type="text" name="prod_prov" class="form-control" value="{{old('prod_prov')}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <label  class="col-sm-2 col-form-label mt-1">N°Série</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('serie')) has-danger @endif">
-                                <input  type="text" name="serie" class="form-control" value="{{old('serie')}}">
+                                <div class="col-sm-7 mt-2 @if($errors->get('prod_serie')) has-danger @endif">
+                                <input  type="text" name="prod_serie" class="form-control" value="{{old('prod_serie')}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <label  class="col-sm-2 col-form-label mt-1">Durée de vie</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('dv')) has-danger @endif">
-                                    <input  type="number" name="dv" class="form-control" value="{{old('dv')}}">
+                                <div class="col-sm-7 mt-2 @if($errors->get('prod_lifetime')) has-danger @endif">
+                                    <input  type="number" name="prod_lifetime" class="form-control" value="{{old('prod_lifetime')}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <label  for="Formaffectation" class="col-sm-2 col-form-label mt-1">Dommaine d'affectation</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('affectation')) has-danger @endif">
-                                <select name="affectation" class="form-control " data-style="btn btn-link" value="{{old('affectation')}}" id="Formaffectation">
-                                    <option value="non affecté" selected>Non affecté</option>
-                                    <option value="complexe" >Complexe</option>
-                                    <option value="urf1">URF 1</option>
-                                    <option value="urf2">URF 2</option>
-                                    <option value="tv">TV</option>
-                                    <option value="mobile">Mobile IT</option>
-                                    <option value="mal">Machine a lavée</option>
-                                    <option value="injection" >Injection</option>
-                                    <option value="parc" >Parc Logistique</option>
-                                    <option value="pneu">Pneu</option>
+                                <div class="col-sm-7 mt-2 @if($errors->get('prod_service')) has-danger @endif">
+                                <select name="prod_service" class="form-control " data-style="btn btn-link" value="{{old('$immo->prod_service')}}" id="Formaffectation">
+                                    @foreach($services as $service)
+                                    <option value="{{$service->service_id}}" selected>{{$service->service_name}}</option>
+                                    @endforeach
                                 </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <label  for="Formtype" class="col-sm-2 col-form-label mt-1">Type d'acquisition</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('type')) has-danger @endif">
-                                <select name="type" class="form-control " data-style="btn btn-link" value="{{old('type')}}" id="Formtype">
+                                <div class="col-sm-7 mt-2 @if($errors->get('prod_type')) has-danger @endif">
+                                <select name="prod_type" class="form-control " data-style="btn btn-link" value="{{old('prod_type')}}" id="Formtype">
                                     <option value="terrains">Terrains</option>
                                     <option value="constructions">Construction</option>
                                     <option value="Matériels de transport">Matériels de transport</option>
@@ -93,18 +80,18 @@
                             </div>
                                 <div class="row">
                                     <label  for="Formnature" class="col-sm-2 col-form-label mt-1" >Nature d'acquisition</label>
-                                    <div class="col-sm-7 mt-2 @if($errors->get('nature')) has-danger @endif">
-                                    <select name="nature" class="form-control " data-style="btn btn-link" value="{{old('nature')}}"  id="Formnature">
-                                        <option value="complexe">acquisition</option>
-                                        <option value="urf1">livraison a soi-meme</option>
-                                        <option value="urf2">location</option>
+                                    <div class="col-sm-7 mt-2 @if($errors->get('prod_nature')) has-danger @endif">
+                                    <select name="prod_nature" class="form-control " data-style="btn btn-link" value="{{old('prod_nature')}}"  id="Formnature">
+                                        <option value="acquisition">acquisition</option>
+                                        <option value="livraison a soi-meme">livraison a soi-meme</option>
+                                        <option value="location">location</option>
                                     </select>
                                     </div>
                             </div>
                             <div class="row">
                                 <label  class="col-sm-2 col-form-label mt-1">couts</label>
-                                <div class="col-sm-7 mt-2 @if($errors->get('cout')) has-danger @endif">
-                                <input  type="number" name="cout" class="form-control" value="{{old('cout')}}">
+                                <div class="col-sm-7 mt-2 @if($errors->get('prod_coast')) has-danger @endif">
+                                <input  type="number" name="prod_coast" class="form-control" value="{{old('prod_coast')}}">
                                 </div>
                             </div>
                             <div class="card-footer ml-auto mr-auto">
